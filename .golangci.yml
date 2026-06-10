@@ -1,0 +1,14 @@
+version: "2"
+
+run:
+  timeout: 3m
+
+linters:
+  default: standard
+  settings:
+    errcheck:
+      exclude-functions:
+        - (*database/sql.Rows).Close
+        - (*database/sql.Tx).Rollback
+        - (*database/sql.DB).Close
+        - (*github.com/redis/go-redis/v9.Client).Close
