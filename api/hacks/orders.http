@@ -1,0 +1,51 @@
+@host = http://localhost:8080
+
+### login (necessário para criar pedido)
+# @name login
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@orderflow.local",
+  "password": "admin123"
+}
+
+### listar cardápio
+GET {{host}}/api/v1/menu
+
+### criar pedido
+POST {{host}}/api/v1/orders
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+{
+  "customer_name": "Maria",
+  "items": [
+    { "menu_item_id": 1, "quantity": 2 },
+    { "menu_item_id": 3, "quantity": 1 }
+  ]
+}
+
+### listar pedidos
+GET {{host}}/api/v1/orders?page=1&limit=20
+
+### listar pedidos filtrando por status
+GET {{host}}/api/v1/orders?status=delivered
+
+### detalhe do pedido com histórico
+GET {{host}}/api/v1/orders/1
+
+### stats do dia
+GET {{host}}/api/v1/stats
+
+### versão
+GET {{host}}/api/v1/version
+
+### liveness
+GET {{host}}/healthz
+
+### readiness
+GET {{host}}/readyz
+
+### métricas prometheus
+GET {{host}}/metrics

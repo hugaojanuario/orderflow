@@ -1,0 +1,30 @@
+@host = http://localhost:8080
+
+### registrar usuário
+POST {{host}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "name": "Hugo",
+  "email": "hugo@orderflow.local",
+  "password": "senha123"
+}
+
+### login (admin do seed)
+# @name login
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@orderflow.local",
+  "password": "admin123"
+}
+
+### login com credenciais inválidas
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@orderflow.local",
+  "password": "senha-errada"
+}
